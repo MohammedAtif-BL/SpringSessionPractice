@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "https://localhost:3000")
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
@@ -23,17 +24,22 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO){
         return new ResponseEntity<>(employeeService.createEmployee(employeeDTO), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Employee> getAllEmployee(){
+    public List<EmployeeDTO> getAllEmployee(){
         return employeeService.getAllEmployee();
     }
 
     @GetMapping("/{id}")
     public Employee getEmployeeByID(@PathVariable Long id){
         return employeeService.getEmployeeById(id);
+    }
+
+    @GetMapping("/department/{dept}")
+    public List<Employee> getEmployeeByDepartment(@PathVariable String dept){
+       return employeeService.getEmployeeByDepartment(dept);
     }
 }

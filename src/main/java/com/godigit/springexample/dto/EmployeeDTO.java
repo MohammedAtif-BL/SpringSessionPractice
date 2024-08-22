@@ -1,17 +1,18 @@
 package com.godigit.springexample.dto;
 
+import com.godigit.springexample.model.Employee;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class EmployeeDTO {
-    @NotNull
-    private Long id;
+
     @NotEmpty(message = "Name Should Not Be Empty")
     @Pattern(regexp = "^[A-Z][a-z]{2,}$", message = "Name is Invalid")
     private String name;
@@ -20,20 +21,17 @@ public class EmployeeDTO {
     @NotBlank(message = "Email Should not be Empty")
     private String email;
 
-    @Min(value=10000,message = "Salary should not be less than 10000")
-    @Max(value = 20000,message = "Salary should not be greater than 20000")
-    private Double salary;
+    private String password;
 
-    @Past(message = "Birthdate Should be in past")
-    private LocalDate birthDate;
+    private List<String> department;
 
-    @PastOrPresent(message = "Rigestration must be Past or Present Date")
-    private LocalDate registrationDate;
+   private AddressDTO address;
 
-    @FutureOrPresent
-    private LocalDate joiningDate;
-
-    @Future
-    private LocalDate event;
-
+    public EmployeeDTO(Employee employee) {
+        this.name = employee.getName();
+        this.email = employee.getEmail();
+        this.department = employee.getDepartment();
+        this.address = new AddressDTO(employee.getAddress());
+        this.password = employee.getPassword();
+    }
 }
