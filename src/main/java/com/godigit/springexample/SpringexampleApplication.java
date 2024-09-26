@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 public class SpringexampleApplication {
 
-//	private static final Logger logger = LoggerFactory.getLogger(SpringbootpracticeApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(SpringexampleApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringexampleApplication.class, args);

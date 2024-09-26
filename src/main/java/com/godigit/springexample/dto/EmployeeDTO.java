@@ -21,6 +21,7 @@ public class EmployeeDTO {
     @NotBlank(message = "Email Should not be Empty")
     private String email;
 
+    @NotNull
     private String password;
 
     private List<String> department;
